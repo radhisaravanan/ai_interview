@@ -1,0 +1,442 @@
+/* =====================================
+            HERO SECTION
+===================================== */
+.hero{
+    position:relative;
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:150px 8% 80px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            rgba(15,23,42,0),
+            rgba(15,23,42,0)
+        ),
+        url("../images/collegeimage.jpeg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+
+/* =====================================
+        BLUR CIRCLES
+===================================== */
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:550px;
+
+    height:550px;
+
+    background:#d1d5dd22;
+
+    border-radius:50%;
+
+    top:-180px;
+
+    right:-180px;
+
+    filter:blur(90px);
+
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+
+    height:420px;
+
+    background:#60a5fa22;
+
+    border-radius:50%;
+
+    bottom:-150px;
+
+    left:-150px;
+
+    filter:blur(80px);
+
+}
+
+
+/* =====================================
+        CONTENT
+===================================== */
+
+.hero-content{
+
+    position:relative;
+
+    z-index:10;
+
+    width:100%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    text-align:center;
+
+    animation:fadeUp 1s ease;
+
+    bottom: 100px;
+
+}
+
+
+/* =====================================
+        TAG
+===================================== */
+
+.hero-tag{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+    padding:12px 28px;
+
+    border-radius:50px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    margin-bottom:35px;
+
+}
+
+
+/* =====================================
+        TITLE
+===================================== */
+
+.hero-left h1{
+
+    font-size:clamp(46px,5vw,70px);
+
+    line-height:1.15;
+
+    font-weight:700;
+
+    color:#db1154;
+
+    margin-bottom:30px;
+
+    letter-spacing:-2px;
+
+}
+
+.hero-left span{
+
+    color:#4063af;
+
+}
+
+
+/* =====================================
+        DESCRIPTION
+===================================== */
+
+.hero-left p{
+
+    max-width:720px;
+
+    margin:auto;
+
+    margin-top:20px;
+
+    font-size:20px;
+
+    line-height:36px;
+
+    color:#64748b;
+
+}
+
+
+/* =====================================
+        BUTTONS
+===================================== */
+
+.hero-buttons{
+
+    margin-top:50px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+}
+
+
+/* =====================================
+        PRIMARY BUTTON
+===================================== */
+
+.btn-primary{
+
+    text-decoration:none;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:18px 45px;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+    box-shadow:
+
+    0 15px 35px rgba(235, 240, 252, 0.25);
+
+}
+
+.btn-primary:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-5px);
+
+}
+
+
+/* =====================================
+        SECONDARY BUTTON
+===================================== */
+
+.btn-secondary{
+
+    text-decoration:none;
+
+    color:#2563eb;
+
+    border:2px solid #2563eb;
+
+    padding:18px 45px;
+
+    border-radius:12px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transform:translateY(-5px);
+
+}
+
+.btn-secondary:hover{
+
+    background:#2563eb;
+
+    color:white;
+    
+
+    transform:translateY(-5px);
+
+}
+
+
+/* =====================================
+        STATS
+===================================== */
+
+.hero-stats{
+
+    margin-top:70px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:80px;
+
+    flex-wrap:wrap;
+
+}
+
+.stat{
+
+    text-align:center;
+
+}
+
+.stat h2{
+
+    font-size:34px;
+
+    color:#2f59b5;
+
+    margin-bottom:8px;
+
+}
+
+.stat p{
+
+    color:#125abe;
+
+    font-size:17px;
+
+}
+
+
+/* =====================================
+        ANIMATION
+===================================== */
+
+@keyframes fadeUp{
+
+0%{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+/* =====================================
+        RESPONSIVE
+===================================== */
+
+@media(max-width:992px){
+
+.hero{
+
+padding:130px 30px 70px;
+
+}
+
+.hero-left h1{
+
+font-size:48px;
+
+}
+
+.hero-left p{
+
+font-size:18px;
+
+line-height:32px;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+}
+
+.btn-primary,
+.btn-secondary{
+
+width:230px;
+
+text-align:center;
+
+}
+
+.hero-stats{
+
+gap:40px;
+
+margin-top:50px;
+
+}
+
+}
+
+
+@media(max-width:576px){
+
+.hero{
+
+padding:120px 20px 60px;
+
+}
+
+.hero-left h1{
+
+font-size:30px;
+
+}
+
+.hero-left p{
+
+font-size:16px;
+
+line-height:28px;
+
+}
+
+.hero-tag{
+
+font-size:13px;
+
+padding:10px 18px;
+
+}
+
+.hero-stats{
+
+flex-direction:column;
+
+gap:30px;
+
+}
+
+}

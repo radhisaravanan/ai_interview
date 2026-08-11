@@ -1,0 +1,84 @@
+.analysis-page{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:#eef4ff;
+
+}
+
+.analysis-card{
+
+    width:700px;
+    background:white;
+    padding:50px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+}
+
+.analysis-card h1{
+
+    color:#2563eb;
+    margin-bottom:15px;
+
+}
+
+.analysis-card p{
+
+    color:#555;
+    margin-bottom:35px;
+
+}
+
+.loader{
+
+    width:80px;
+    height:80px;
+    border:8px solid #ddd;
+    border-top:8px solid #2563eb;
+    border-radius:50%;
+    margin:auto;
+    animation:spin 1s linear infinite;
+
+}
+
+.steps{
+
+    margin-top:40px;
+    text-align:left;
+
+}
+
+.active-step{
+
+    background:#e0f2fe;
+    color:#2563eb;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:12px;
+    font-weight:600;
+
+}
+
+.inactive-step{
+
+    background:#f8fafc;
+    color:#888;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:12px;
+
+}
+
+@keyframes spin{
+
+    100%{
+
+        transform:rotate(360deg);
+
+    }
+
+}

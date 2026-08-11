@@ -1,0 +1,137 @@
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:Poppins,sans-serif;
+
+}
+
+.setup-page{
+
+min-height:80vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:#eef4ff;
+
+padding:10px;
+text-align:left;
+}
+
+.setup-card{
+
+width:600px;
+
+background:rgb(204, 156, 190);
+
+padding:5px;
+
+border-radius:40px;
+
+
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+
+}
+
+.setup-card h1{
+
+text-align:center;
+
+color:#d01033;
+
+margin-bottom:20px;
+
+}
+
+
+
+.form-group{
+
+margin-bottom:20px;
+
+
+
+}
+
+.form-group label{
+
+display:block;
+
+font-weight:600;
+text-align:left;
+
+
+margin-bottom:8px;
+
+}
+
+.form-group input,
+
+.form-group select{
+
+width:100%;
+
+padding:10px;
+
+border:1px solid #ccc;
+
+border-radius:10px;
+
+font-size:16px;
+
+text-align: center;
+
+
+
+}
+
+.start-button {
+
+    width:40%;
+
+    padding:15px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+
+    /* Align button itself to center */
+    margin: 0 auto;
+
+
+    /* Align icon and text inside button */
+    display:flex;
+
+    justify-content:center;   /* center horizontally */
+
+    align-items:center;       /* center vertically */
+
+
+    gap:10px;                 /* space between icon and text */
+
+}
+
+.start-button:hover{
+
+background:#1d4ed8;
+
+}

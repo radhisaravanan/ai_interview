@@ -1,0 +1,969 @@
+/* =====================================
+        MZORA AI INTERVIEW ROOM
+        SKY BLUE FUTURISTIC GLASS UI
+===================================== */
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+
+.room{
+
+    min-height:100vh;
+
+    padding:30px;
+
+    position:relative;
+
+    overflow:hidden;
+
+
+    background:
+
+    linear-gradient(
+        rgba(2,6,23,.55),
+        rgba(15,23,42,.65)
+    ),
+
+    url("../images/collegeimage.jpeg");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+}
+
+
+
+/* =========================
+   AI LIGHT EFFECT
+========================= */
+
+
+.room::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+
+    height:450px;
+
+    background:#38bdf8;
+
+    border-radius:50%;
+
+    filter:blur(130px);
+
+    opacity:.35;
+
+    top:-150px;
+
+    left:-150px;
+
+    animation:glowMove 8s infinite alternate;
+
+}
+
+
+
+.room::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+
+    height:420px;
+
+    background:#2563eb;
+
+    border-radius:50%;
+
+    filter:blur(130px);
+
+    opacity:.35;
+
+    right:-120px;
+
+    bottom:-120px;
+
+    animation:glowMove 10s infinite alternate;
+
+}
+
+
+
+@keyframes glowMove{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+    to{
+
+        transform:translateY(70px);
+
+    }
+
+}
+
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+
+.container{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+
+    1fr .65fr;
+
+    gap:25px;
+
+}
+
+
+
+/* =========================
+   GLASS CARD
+========================= */
+
+
+.card{
+
+
+    background:
+
+    rgba(255,255,255,.12);
+
+
+    backdrop-filter:
+
+    blur(25px);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+    border-radius:28px;
+
+
+    padding:25px;
+
+
+    box-shadow:
+
+    0 25px 60px rgba(0,0,0,.45);
+
+
+    animation:
+
+    cardShow .7s ease;
+
+}
+
+
+
+@keyframes cardShow{
+
+
+from{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+}
+
+
+to{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+}
+
+
+
+/* =========================
+   TITLE
+========================= */
+
+
+h1{
+
+
+font-size:30px;
+
+font-weight:800;
+
+
+background:
+
+linear-gradient(
+90deg,
+#38bdf8,
+#60a5fa,
+#818cf8
+);
+
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+
+margin:18px 0;
+
+
+}
+
+
+
+h2{
+
+color:white;
+
+font-size:22px;
+
+margin-bottom:20px;
+
+}
+
+
+
+/* =========================
+   QUESTION BADGE
+========================= */
+
+
+.badge{
+
+
+display:inline-block;
+
+
+padding:
+
+8px 18px;
+
+
+border-radius:50px;
+
+
+background:
+
+linear-gradient(
+135deg,
+#0284c7,
+#2563eb
+);
+
+
+color:white;
+
+
+font-size:14px;
+
+
+font-weight:700;
+
+
+box-shadow:
+
+0 0 25px rgba(56,189,248,.7);
+
+
+}
+
+
+
+
+/* =========================
+   STATUS
+========================= */
+
+
+.status{
+
+
+margin-top:15px;
+
+
+padding:14px;
+
+
+border-radius:18px;
+
+
+background:
+
+rgba(56,189,248,.15);
+
+
+border:
+
+1px solid rgba(125,211,252,.4);
+
+
+color:#bae6fd;
+
+
+font-weight:600;
+
+
+}
+
+
+
+/* =========================
+   QUESTION BOX
+========================= */
+
+
+.question{
+
+
+margin-top:20px;
+
+
+padding:22px;
+
+
+border-radius:22px;
+
+
+background:
+
+rgba(2,6,23,.85);
+
+
+border:
+
+1px solid rgba(56,189,248,.3);
+
+
+color:white;
+
+
+font-size:18px;
+
+
+line-height:1.7;
+
+
+box-shadow:
+
+inset 0 0 25px rgba(56,189,248,.2);
+
+
+}
+
+
+
+/* =========================
+   LOADING SPINNER (Generating AI Questions...)
+========================= */
+
+
+.loading-box{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+gap:20px;
+
+min-height:300px;
+
+text-align:center;
+
+}
+
+
+.spinner{
+
+width:56px;
+
+height:56px;
+
+border-radius:50%;
+
+border:5px solid rgba(56,189,248,.2);
+
+border-top-color:#38bdf8;
+
+animation:spin 0.8s linear infinite;
+
+}
+
+
+@keyframes spin{
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+
+/* =========================
+   TRANSCRIPT
+========================= */
+
+
+.transcript{
+
+
+margin-top:20px;
+
+
+min-height:120px;
+
+
+padding:20px;
+
+
+border-radius:20px;
+
+
+background:
+
+rgba(15,23,42,.9);
+
+
+border:
+
+1px solid rgba(56,189,248,.3);
+
+
+color:#bae6fd;
+
+
+line-height:1.6;
+
+
+position:relative;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+.transcript::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+top:0;
+
+left:0;
+
+
+height:3px;
+
+width:100%;
+
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+#38bdf8,
+transparent
+);
+
+
+animation:
+
+scan 2s infinite;
+
+
+}
+
+
+@keyframes scan{
+
+
+from{
+
+transform:translateX(-100%);
+
+}
+
+
+to{
+
+transform:translateX(100%);
+
+}
+
+
+}
+
+
+/* =========================
+   TRANSCRIPT TEXTAREA (READ-ONLY VOICE BOX)
+========================= */
+
+
+textarea.transcript{
+
+width:100%;
+
+min-height:150px;
+
+resize:none;
+
+display:block;
+
+font-family:"Poppins",sans-serif;
+
+font-size:15px;
+
+line-height:1.6;
+
+outline:none;
+
+color:#bae6fd;
+
+}
+
+
+
+
+
+/* =========================
+   TIMER
+========================= */
+
+
+.timer{
+
+margin-top:15px;
+
+display:inline-block;
+
+padding:10px 22px;
+
+border-radius:50px;
+
+background:
+
+linear-gradient(
+135deg,
+#0ea5e9,
+#2563eb
+);
+
+color:white;
+
+font-size:20px;
+
+font-weight:800;
+
+letter-spacing:1px;
+
+box-shadow:
+
+0 0 25px rgba(56,189,248,.6);
+
+}
+
+
+
+/* =========================
+   CATEGORY TAG
+========================= */
+
+
+.category-tag{
+
+display:inline-block;
+
+margin-left:10px;
+
+padding:4px 12px;
+
+border-radius:50px;
+
+background:
+
+rgba(255,255,255,.18);
+
+border:
+
+1px solid rgba(255,255,255,.4);
+
+font-size:12px;
+
+font-weight:600;
+
+color:#e0f2fe;
+
+}
+
+
+
+/* =========================
+   RETAKE BUTTON
+========================= */
+
+
+.retake{
+
+background:
+
+linear-gradient(
+135deg,
+#f59e0b,
+#fbbf24
+);
+
+box-shadow:
+
+0 15px 35px rgba(245,158,11,.4);
+
+}
+
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+
+.button-area{
+
+
+display:flex;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+
+}
+
+
+
+button{
+
+
+margin-top:20px;
+
+
+padding:
+
+14px 30px;
+
+
+border:none;
+
+
+border-radius:50px;
+
+
+font-size:15px;
+
+
+font-weight:700;
+
+
+cursor:pointer;
+
+
+color:white;
+
+
+transition:.3s;
+
+
+}
+
+
+
+button:hover{
+
+
+transform:
+
+translateY(-5px);
+
+
+}
+
+
+
+
+.mic{
+
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#38bdf8
+);
+
+
+box-shadow:
+
+0 15px 35px rgba(56,189,248,.4);
+
+
+}
+
+
+
+.stop{
+
+
+background:
+
+linear-gradient(
+135deg,
+#dc2626,
+#fb7185
+);
+
+
+}
+
+
+
+
+.next{
+
+
+background:
+
+linear-gradient(
+135deg,
+#16a34a,
+#22c55e
+);
+
+
+}
+
+
+
+/* =========================
+   CAMERA
+========================= */
+
+
+.camera-card{
+
+position:relative;
+
+}
+
+
+
+.camera-wrapper{
+
+
+position:relative;
+
+
+}
+
+
+
+.camera-wrapper video{
+
+
+width:100%;
+
+
+height:330px;
+
+
+object-fit:cover;
+
+
+border-radius:25px;
+
+
+background:#020617;
+
+
+border:
+
+3px solid #38bdf8;
+
+
+box-shadow:
+
+0 0 40px rgba(56,189,248,.6);
+
+
+}
+
+
+
+
+.live-tag{
+
+
+position:absolute;
+
+
+top:15px;
+
+
+right:15px;
+
+
+padding:8px 18px;
+
+
+border-radius:50px;
+
+
+background:#ef4444;
+
+
+color:white;
+
+
+font-weight:700;
+
+
+box-shadow:
+
+0 0 20px red;
+
+
+animation:
+
+pulse 1.5s infinite;
+
+
+}
+
+
+
+@keyframes pulse{
+
+
+50%{
+
+opacity:.5;
+
+transform:scale(1.1);
+
+}
+
+
+}
+
+
+
+
+.camera-msg{
+
+
+margin-top:15px;
+
+color:#38bdf8;
+
+}
+
+
+
+.camera-error{
+
+
+margin-top:15px;
+
+color:#fb7185;
+
+}
+
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+
+@media(max-width:900px){
+
+
+.container{
+
+grid-template-columns:1fr;
+
+}
+
+
+.camera-wrapper video{
+
+height:280px;
+
+}
+
+
+h1{
+
+font-size:26px;
+
+}
+
+
+}

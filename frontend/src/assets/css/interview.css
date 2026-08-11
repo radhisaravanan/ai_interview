@@ -1,0 +1,505 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    overflow-x:hidden;
+    background:
+linear-gradient(rgba(239, 240, 241, 0.255),rgba(242, 244, 247, 0.096)),
+url("https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1920&q=80");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:fixed;
+}
+
+/* ===================================
+   Background
+=================================== */
+
+.interview-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+    background:
+    linear-gradient(rgba(10,20,40,.75),rgba(10,20,40,.75)),
+    url("../images/interview-bg.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+}
+
+/* ===================================
+   Main Card
+=================================== */
+
+.interview-card{
+
+    width:750px;
+
+    background:rgba(255,255,255,.14);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.2);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    box-shadow:0 25px 50px rgba(0,0,0,.45);
+
+    animation:fadeIn .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===================================
+ Header
+=================================== */
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:25px;
+
+}
+
+.header h2{
+
+color:white;
+
+font-size:28px;
+
+font-weight:700;
+
+}
+
+.header h3{
+
+font-size:34px;
+
+font-weight:700;
+
+color:#00FFD5;
+
+}
+
+/* ===================================
+ Progress
+=================================== */
+
+.progress{
+
+height:12px;
+
+background:rgba(255,255,255,.2);
+
+border-radius:50px;
+
+overflow:hidden;
+
+margin-bottom:25px;
+
+}
+
+.progress-bar{
+
+height:100%;
+
+background:linear-gradient(90deg,#00e5ff,#00ff87);
+
+border-radius:50px;
+
+transition:.5s;
+
+}
+
+/* ===================================
+ Question Number
+=================================== */
+
+h4{
+
+text-align:center;
+
+color:white;
+
+font-size:22px;
+
+margin-bottom:20px;
+
+}
+
+/* ===================================
+ Question Box
+=================================== */
+
+.question-box{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+font-size:21px;
+
+font-weight:600;
+
+text-align:center;
+
+color:#222;
+
+margin-bottom:20px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+}
+
+/* ===================================
+ Buttons
+=================================== */
+
+.speak-btn{
+
+width:100%;
+
+padding:14px;
+
+margin-bottom:18px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:17px;
+
+font-weight:600;
+
+cursor:pointer;
+
+color:white;
+
+background:linear-gradient(135deg,#6a11cb,#2575fc);
+
+transition:.3s;
+
+}
+
+.speak-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 12px 25px rgba(37,117,252,.4);
+
+}
+
+/* ===================================
+ Textarea
+=================================== */
+
+textarea{
+
+width:100%;
+
+height:150px;
+
+padding:18px;
+
+border:none;
+
+border-radius:15px;
+
+font-size:16px;
+
+resize:none;
+
+outline:none;
+
+background:rgba(255,255,255,.95);
+
+margin-bottom:20px;
+
+transition:.3s;
+
+}
+
+textarea:focus{
+
+box-shadow:0 0 15px #00E5FF;
+
+}
+
+/* ===================================
+ Button Group
+=================================== */
+
+.button-group{
+
+display:flex;
+
+justify-content:center;
+
+margin-bottom:15px;
+
+}
+
+/* ===================================
+ Mic Button
+=================================== */
+
+.mic-btn{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+color:white;
+
+background:linear-gradient(135deg,#00C853,#43E97B);
+
+animation:pulse 2s infinite;
+
+transition:.3s;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+box-shadow:0 0 0 0 rgba(0,255,120,.6);
+
+}
+
+70%{
+
+box-shadow:0 0 0 18px rgba(0,255,120,0);
+
+}
+
+100%{
+
+box-shadow:0 0 0 0 rgba(0,255,120,0);
+
+}
+
+}
+
+.mic-btn:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* ===================================
+ Stop Button
+=================================== */
+
+.stop-btn{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+color:white;
+
+background:linear-gradient(135deg,#ff416c,#ff4b2b);
+
+transition:.3s;
+
+}
+
+.stop-btn:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* ===================================
+ Status
+=================================== */
+
+.record-status{
+
+text-align:center;
+
+margin:15px 0;
+
+font-size:18px;
+
+font-weight:600;
+
+color:white;
+
+}
+
+/* ===================================
+ Submit Button
+=================================== */
+
+.submit-btn{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+color:white;
+
+background:linear-gradient(135deg,#2962FF,#00B0FF);
+
+transition:.3s;
+
+}
+
+.submit-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 15px 30px rgba(0,176,255,.4);
+
+}
+
+/* ===================================
+ Scrollbar
+=================================== */
+
+textarea::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+textarea::-webkit-scrollbar-thumb{
+
+background:#0099ff;
+
+border-radius:20px;
+
+}
+
+/* ===================================
+ Mobile
+=================================== */
+
+@media(max-width:768px){
+
+.interview-card{
+
+width:95%;
+
+padding:20px;
+
+}
+
+.header{
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+.header h2{
+
+font-size:24px;
+
+text-align:center;
+
+}
+
+.header h3{
+
+font-size:28px;
+
+}
+
+.question-box{
+
+font-size:18px;
+
+}
+
+textarea{
+
+height:130px;
+
+}
+
+}

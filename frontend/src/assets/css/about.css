@@ -1,0 +1,168 @@
+/* ===========================
+   ABOUT SECTION
+=========================== */
+
+.about {
+    position: relative;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 80px 8%;
+
+    background: url("../images/collegeimage.jpeg");
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* Dark Overlay */
+
+.about-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    z-index:1;
+}
+
+/* Blue Glow */
+
+.about::before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:#38bdf8;
+    opacity:.18;
+    border-radius:50%;
+    filter:blur(100px);
+    top:-150px;
+    left:-120px;
+    z-index:1;
+}
+
+/* ===========================
+   CONTENT CARD
+=========================== */
+
+.about-center{
+
+    position:relative;
+    z-index:2;
+
+    width:900px;
+    max-width:100%;
+
+    padding:60px 55px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,0.12);
+
+  
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.25);
+
+    border-radius:30px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+}
+
+/* ===========================
+   TAG
+=========================== */
+
+.about-tag{
+
+    display:inline-block;
+
+    padding:12px 28px;
+
+    border-radius:40px;
+
+    background:rgba(255,255,255,0.2);
+
+    color:#fff;
+
+    font-weight:600;
+
+    font-size:18px;
+
+    border:1px solid rgba(255,255,255,.3);
+
+    margin-bottom:20px;
+}
+
+/* ===========================
+   HEADING
+=========================== */
+
+.about-center h2{
+
+    font-size:48px;
+
+    color:#ffffff;
+
+    margin-bottom:25px;
+
+    line-height:1.3;
+
+    font-weight:700;
+
+    text-shadow:0 4px 20px rgba(0,0,0,.5);
+}
+
+/* ===========================
+   PARAGRAPH
+=========================== */
+
+.about-center p{
+
+    font-size:20px;
+
+    color:#f8fafc;
+
+    line-height:36px;
+
+    margin-bottom:22px;
+
+    font-weight:400;
+
+    text-shadow:0 2px 8px rgba(0,0,0,.5);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width:900px){
+
+.about{
+
+    padding:50px 20px;
+}
+
+.about-center{
+
+    padding:35px 25px;
+}
+
+.about-center h2{
+
+    font-size:34px;
+}
+
+.about-center p{
+
+    font-size:17px;
+    line-height:30px;
+}
+
+.about-tag{
+
+    font-size:16px;
+}
+}

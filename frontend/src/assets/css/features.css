@@ -1,0 +1,280 @@
+/* ===========================
+   FEATURES SECTION
+=========================== */
+
+.features{
+    position: relative;
+    padding:120px 8%;
+    background: linear-gradient(
+            rgba(15,23,42,0),
+            rgba(15,23,42,0)
+        ),
+        url("../images/collegeimage.jpeg");
+
+    overflow:hidden;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+/* Decorative Background */
+
+.features::before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:rgba(59,130,246,.08);
+    border-radius:50%;
+    top:-180px;
+    left:-180px;
+    filter:blur(30px);
+}
+
+.features::after{
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+    background:rgba(14,165,233,.08);
+    border-radius:50%;
+    bottom:-150px;
+    right:-120px;
+    filter:blur(30px);
+}
+
+/* ===========================
+   Section Heading
+=========================== */
+
+.section-title{
+    text-align:center;
+    margin-bottom:70px;
+    position:relative;
+    z-index:2;
+}
+
+.section-title span{
+    display:inline-block;
+    background:#dbeafe;
+    color:#2563eb;
+    padding:8px 20px;
+    border-radius:50px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:18px;
+    letter-spacing:1px;
+}
+
+.section-title h2{
+    font-size:48px;
+    font-weight:700;
+    color:#0f172a;
+    margin-bottom:18px;
+}
+
+.section-title p{
+    max-width:650px;
+    margin:auto;
+    color:#64748b;
+    font-size:18px;
+    line-height:30px;
+}
+
+/* ===========================
+   Grid
+=========================== */
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:35px;
+    position:relative;
+    z-index:2;
+}
+
+/* ===========================
+   Card
+=========================== */
+
+.feature-card{
+    position:relative;
+    padding:40px 30px;
+    border-radius:24px;
+
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.6);
+
+    box-shadow:
+        0 12px 35px rgba(15,23,42,.08);
+
+    transition:.45s ease;
+    overflow:hidden;
+}
+
+/* Top Gradient Line */
+
+.feature-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:linear-gradient(90deg,#2563eb,#38bdf8);
+}
+
+/* Hover Glow */
+
+.feature-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:24px;
+    background:linear-gradient(135deg,
+        rgba(37,99,235,.08),
+        rgba(14,165,233,.05));
+    opacity:0;
+    transition:.4s;
+}
+
+.feature-card:hover::after{
+    opacity:1;
+}
+
+.feature-card:hover{
+    transform:translateY(-14px);
+    box-shadow:
+        0 25px 55px rgba(37,99,235,.18);
+}
+
+/* ===========================
+   Icon
+=========================== */
+
+.feature-icon{
+
+    width:82px;
+    height:82px;
+
+    margin-bottom:28px;
+
+    border-radius:22px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:34px;
+
+    color:white;
+
+    background:linear-gradient(135deg,#2563eb,#38bdf8);
+
+    box-shadow:
+        0 15px 30px rgba(37,99,235,.30);
+
+    transition:.4s;
+}
+
+.feature-card:hover .feature-icon{
+
+    transform:rotate(-10deg) scale(1.12);
+
+}
+
+/* ===========================
+   Title
+=========================== */
+
+.feature-card h3{
+
+    font-size:24px;
+    font-weight:700;
+    color:#0f172a;
+
+    margin-bottom:15px;
+
+}
+
+/* ===========================
+   Description
+=========================== */
+
+.feature-card p{
+
+    color:#64748b;
+    font-size:16px;
+    line-height:30px;
+
+}
+
+/* ===========================
+   Hover Border
+=========================== */
+
+.feature-card:hover{
+
+    border:1px solid rgba(37,99,235,.25);
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:992px){
+
+    .features{
+
+        padding:90px 7%;
+
+    }
+
+    .section-title h2{
+
+        font-size:40px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .section-title h2{
+
+        font-size:34px;
+
+    }
+
+    .section-title p{
+
+        font-size:16px;
+
+    }
+
+    .feature-card{
+
+        padding:32px 24px;
+
+    }
+
+}
+
+@media(max-width:500px){
+
+    .features{
+
+        padding:70px 6%;
+
+    }
+
+    .feature-grid{
+
+        gap:22px;
+
+    }
+
+}

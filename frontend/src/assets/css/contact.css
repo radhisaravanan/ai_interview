@@ -1,0 +1,256 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+.contact{
+
+    position:relative;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:100px 8%;
+
+    background:url("../images/collegeimage.jpeg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    overflow:hidden;
+}
+
+/* Overlay */
+
+.contact-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.60);
+}
+
+/* Card */
+
+.contact-container{
+
+    position:relative;
+
+    z-index:2;
+
+    width:1100px;
+
+    max-width:100%;
+
+    background:rgba(255,255,255,.12);
+
+   
+
+    border-radius:25px;
+
+    padding:60px;
+
+    border:1px solid rgba(255,255,255,.2);
+
+    text-align:center;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+}
+
+/* Tag */
+
+.contact-tag{
+
+    display:inline-block;
+
+    padding:10px 30px;
+
+    background:#38bdf8;
+
+    color:white;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+}
+
+.contact-container h2{
+
+    color:white;
+
+    font-size:40px;
+
+    margin-bottom:20px;
+}
+
+.contact-description{
+
+    color:#f1f5f9;
+
+    font-size:18px;
+
+    line-height:30px;
+
+    max-width:850px;
+
+    margin:0 auto 40px;
+}
+
+/* Grid */
+
+.contact-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+
+    margin-top:20px;
+}
+
+/* Card */
+
+.contact-card{
+
+    background:rgba(255,255,255,.12);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    transition:.4s;
+
+   
+}
+
+.contact-card:hover{
+
+    transform:translateY(-8px);
+
+    background:rgba(56,189,248,.25);
+}
+
+.contact-icon{
+
+    font-size:42px;
+
+    color:#38bdf8;
+
+    margin-bottom:15px;
+}
+
+.contact-card h3{
+
+    color:white;
+
+    margin-bottom:10px;
+
+    font-size:22px;
+}
+
+.contact-card a{
+
+    color:#f8fafc;
+
+    text-decoration:none;
+
+    font-size:16px;
+
+    word-break:break-word;
+}
+
+.contact-card a:hover{
+
+    color:#38bdf8;
+}
+
+/* Address */
+
+.address-box{
+
+    margin-top:50px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    background:rgba(255,255,255,.12);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.address-icon{
+
+    font-size:50px;
+
+    color:#38bdf8;
+}
+
+.address-box h3{
+
+    color:white;
+
+    margin-bottom:10px;
+}
+
+.address-box p{
+
+    color:#f8fafc;
+
+    line-height:28px;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.contact{
+
+    padding:60px 20px;
+}
+
+.contact-container{
+
+    padding:35px 25px;
+}
+
+.contact-container h2{
+
+    font-size:30px;
+}
+
+.contact-description{
+
+    font-size:16px;
+}
+
+.address-box{
+
+    flex-direction:column;
+
+    text-align:center;
+}
+
+}

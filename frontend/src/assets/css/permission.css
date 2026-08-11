@@ -1,0 +1,909 @@
+/* =====================================
+   MZORA AI - PERMISSION PAGE
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+/* ===============================
+   BACKGROUND
+================================ */
+
+.permission-page{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px;
+
+    overflow:hidden;
+
+    background:url("../images/collegeimage.jpeg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+/* Dark Overlay */
+
+.permission-overlay{
+     position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    z-index:1;
+}
+
+/* Floating Glow Left */
+
+.permission-page::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:550px;
+    height:550px;
+
+    top:-180px;
+    left:-180px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(14,165,233,.8),
+    transparent 70%);
+
+    filter:blur(50px);
+
+    animation:floatGlow 8s infinite ease-in-out;
+}
+
+/* Floating Glow Right */
+
+.permission-page::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    bottom:-180px;
+    right:-150px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(37,99,235,.8),
+    transparent 70%);
+
+    
+    animation:floatGlow 10s infinite reverse ease-in-out;
+}
+
+@keyframes floatGlow{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(40px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+/* ===============================
+   MAIN GLASS CARD
+================================ */
+
+.permission-card{
+
+    position:relative;
+    z-index:5;
+
+    width:100%;
+    max-width:1250px;
+
+    display:grid;
+
+    grid-template-columns:48% 52%;
+
+    gap:45px;
+
+    padding:45px;
+
+    border-radius:30px;
+
+background: rgba(141, 138, 138, 0.2);
+
+    
+
+    border:3px solid rgba(255,255,255,.25);
+
+    box-shadow:
+    0 25px 70px rgba(0,0,0,.35);
+
+}
+
+/* ===============================
+   LEFT COLUMN
+================================ */
+
+.preview-column{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+height:100%;
+}
+
+/* Camera Box */
+
+.video-box{
+
+    position:relative;
+
+    width:80%;
+    height:380px;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    background:#020617;
+
+    border:3px solid rgba(56,189,248,.45);
+
+    box-shadow:
+    0 0 35px rgba(56,189,248,.35);
+}
+
+.video-box video{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+/* Neon Border */
+
+.video-box::after{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:25px;
+
+    box-shadow:
+    inset 0 0 30px rgba(56,189,248,.35);
+
+    pointer-events:none;
+}
+
+/* Camera Badge */
+
+.camera-label{
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:12px 20px;
+
+    background:rgba(0,0,0,.45);
+
+    backdrop-filter:blur(12px);
+
+    color:white;
+
+    border-radius:40px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    z-index:2;
+}
+
+.live-dot{
+
+    width:10px;
+    height:10px;
+
+    background:#22c55e;
+
+    border-radius:50%;
+
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+50%{
+
+transform:scale(1.6);
+
+opacity:.5;
+
+}
+
+}
+
+/* Text Below Camera */
+
+.preview-text{
+
+    margin-top:20px;
+
+    text-align:center;
+
+    color:#e2e8f0;
+
+    font-size:15px;
+
+    line-height:1.8;
+}
+/* ===============================
+   RIGHT CONTENT
+================================ */
+
+.controls-column{
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    width:100%;
+    height:100%;
+}
+
+.step{
+
+    width:max-content;
+
+    padding:10px 22px;
+
+    border-radius:40px;
+
+    background:linear-gradient(135deg,#0284c7,#2563eb);
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+}
+
+/* Heading */
+
+.title{
+
+    font-size:38px;
+    font-weight:700;
+
+    color:#77d307;
+
+    margin-bottom:40px;
+
+    text-align:center;
+}
+
+.subtitle{
+
+    font-size:16px;
+
+    color:#dbeafe;
+
+    margin-bottom:35px;
+
+    line-height:1.7;
+}
+
+
+/* ===============================
+   STATUS GRID
+================================ */
+.status-grid{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    width:100%;
+
+    margin-bottom:45px;
+}
+
+
+/* Individual Card */
+
+.status-card{
+
+    width:180px;
+
+    height:270px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.12);
+
+
+
+    border:5px solid rgba(30, 161, 205, 0.2);
+}
+
+.status-card:hover{
+
+    transform:translateY(-8px);
+
+    background:rgba(56,189,248,.18);
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.25);
+}
+
+
+/* Icon */
+
+.icon-circle{
+
+    width:75px;
+
+    height:75px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+    135deg,
+    #38bdf8,
+    #2563eb
+    );
+
+    color:white;
+
+    font-size:30px;
+
+    margin-bottom:20px;
+
+    box-shadow:
+
+    0 10px 25px rgba(14,165,233,.4);
+}
+
+
+/* Heading */
+
+.status-card h3{
+
+    color:rgb(249, 251, 252);
+
+    font-size:20px;
+
+    font-weight: 700;
+    margin-bottom:18px;
+}
+
+
+/* Success */
+
+.success{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    color:#4ade80;
+
+    font-size:16px;
+
+    font-weight:600;
+}
+
+
+/* Error */
+
+.error{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    color:#cff10b;
+
+    font-size:16px;
+
+    font-weight:600;
+}
+
+
+/* ===============================
+   BUTTONS
+================================ */
+
+.button-group{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:stretch;
+
+    gap:20px;
+
+    width:100%;
+
+    margin-top:40px;
+}
+
+
+/* Common Button */
+
+.recheck-btn,
+.continue-btn{
+
+    width:200px;
+    height:70px;
+
+    display:inline-flex;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:10px;
+
+    padding:0;
+
+    border:none;
+    border-radius:50px;
+
+    font-size:18px;
+    font-weight:600;
+
+    line-height:1;
+
+    box-sizing:border-box;
+
+    cursor:pointer;
+}
+
+.recheck-btn,
+.continue-btn{
+height:70px;
+    vertical-align:middle;
+}
+
+.recheck-btn span,
+.continue-btn span{
+
+    display:flex;
+    align-items:center;
+}
+
+.continue-btn svg{
+
+    display:block;
+
+    font-size:18px;
+
+    flex-shrink:0;
+}
+
+
+/* Recheck */
+
+.recheck-btn{
+
+    background:white;
+
+    color:#0284c7;
+
+    box-shadow:
+
+    0 10px 25px rgba(14,165,233,.25);
+}
+
+.recheck-btn:hover{
+
+    transform:translateY(-4px);
+
+    background:#e0f2fe;
+}
+
+
+/* Continue */
+
+.continue-btn{
+
+    display:flex;
+     
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:white;
+
+    background:linear-gradient(
+    135deg,
+    #0284c7,
+    #2563eb
+    );
+
+    box-shadow:
+
+    0 18px 35px rgba(37,99,235,.45);
+}
+
+.continue-btn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+
+    0 25px 45px rgba(22, 93, 246, 0.55);
+}
+.continue-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:12px;
+
+    transform:none;
+}
+.button-group{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+
+    width:100%;
+}
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+/* Laptop */
+
+@media (max-width:1200px){
+
+.permission-card{
+
+    max-width:1100px;
+
+    gap:35px;
+
+    padding:35px;
+
+}
+
+.status-grid{
+
+    gap:18px;
+
+}
+
+.status-card{
+
+    min-height:200px;
+
+}
+
+.title{
+
+    font-size:34px;
+
+}
+
+}
+
+
+/* Tablet */
+
+@media (max-width:992px){
+
+.permission-card{
+
+    grid-template-columns:1fr;
+
+    gap:40px;
+
+}
+
+.preview-column{
+
+    order:1;
+
+}
+
+.controls-column{
+
+    order:2;
+
+}
+
+.video-box{
+
+    height:350px;
+
+}
+
+.status-grid{
+
+    grid-template-columns:repeat(3,1fr);
+
+}
+
+.button-group{
+
+    margin-top:35px;
+
+}
+
+}
+
+
+/* Small Tablet */
+
+@media (max-width:768px){
+
+.permission-page{
+
+    padding:25px;
+
+}
+
+.permission-card{
+
+    padding:30px;
+
+}
+
+.video-box{
+
+    height:300px;
+
+}
+
+.title{
+
+    font-size:30px;
+
+}
+
+.step{
+
+    margin:auto;
+
+    margin-bottom:20px;
+
+}
+
+.controls-column{
+
+    text-align:center;
+
+}
+
+.status-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.status-card{
+
+    min-height:180px;
+
+}
+
+.button-group{
+
+    flex-direction:column;
+
+}
+
+.recheck-btn,
+
+.continue-btn{
+
+    width:100%;
+
+}
+
+}
+
+
+/* Mobile */
+
+@media (max-width:576px){
+
+.permission-page{
+
+    padding:15px;
+
+}
+
+.permission-card{
+
+    padding:20px;
+
+    border-radius:20px;
+
+}
+
+.video-box{
+
+    height:220px;
+
+    border-radius:20px;
+
+}
+
+.camera-label{
+
+    padding:8px 15px;
+
+    font-size:12px;
+
+}
+
+.icon-circle{
+
+    width:60px;
+
+    height:60px;
+
+    font-size:24px;
+
+}
+
+.status-card{
+
+    padding:20px;
+
+    min-height:160px;
+
+}
+
+.status-card h3{
+
+    font-size:18px;
+
+}
+
+.success,
+
+.error{
+
+    font-size:15px;
+
+}
+
+.title{
+
+    font-size:25px;
+
+}
+
+.step{
+
+    font-size:12px;
+
+    padding:8px 18px;
+
+}
+
+.recheck-btn,
+
+.continue-btn{
+
+    height:50px;
+
+    font-size:15px;
+
+}
+
+}
+
+
+/* Very Small Devices */
+
+@media (max-width:400px){
+
+.permission-card{
+
+    padding:15px;
+
+}
+
+.video-box{
+
+    height:180px;
+
+}
+
+.title{
+
+    font-size:22px;
+
+}
+
+.status-card{
+
+    min-height:150px;
+
+}
+
+.camera-label{
+
+    left:10px;
+
+    top:10px;
+
+}
+
+}

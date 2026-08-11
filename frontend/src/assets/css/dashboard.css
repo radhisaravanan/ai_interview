@@ -1,0 +1,634 @@
+/* ==========================================================
+   MZORA AI DASHBOARD
+   PART 1
+   Global + Background + Statistics Cards
+========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+body{
+   
+    background:#d6d8de;
+}
+
+/* ===============================
+   Main Layout
+================================= */
+
+.dashboard-layout{
+
+    position:relative;
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+/* ===============================
+   Dashboard Background
+================================= */
+
+.dashboard-page{
+
+    flex:1;
+
+    width:100%;
+
+    min-height:100vh;
+
+    margin-left:0;      /* ← remove the 280px space */
+
+    padding:35px;
+
+    background:
+        linear-gradient(rgba(0,0,0,.45),
+        rgba(0,0,0,.45)),
+        url("../images/mountzion.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+    overflow-x:hidden;
+
+}
+
+/* ===============================
+   Statistics
+================================= */
+
+.stats-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:45px;
+
+}
+
+/* ===============================
+   Glass Card
+================================= */
+
+/* ===============================
+   Glass Card (All Cards)
+================================= */
+.stat-card {
+    width: 280px !important;
+    max-width: 280px !important;
+    height: 125px;
+    border-radius: 24px;
+    background: rgba(192, 180, 180, 0.18) !important;
+    border: 1px solid rgba(255, 255, 255, .25);
+    display: flex;
+    align-items: center;
+    padding: 22px;
+    color: #e6dbdb;
+    transition: .35s;
+  /* Restores the glass look */
+}
+
+/* Hover effect shared by all cards */
+.stat-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, .28) !important;
+}
+
+/* ===============================
+   Third Card Specific Styles
+================================= */
+.resume-card h2 {
+    color: #f6efef !important; /* Forces font color match */
+}
+
+.resume-card p {
+    color: rgba(246, 241, 241, 0.92) !important; /* Forces font color match */
+}
+
+/* ===============================
+   Icons
+================================= */
+
+/* ===============================
+   Icons
+================================= */
+.stat-icon {
+    width: 70px;         /* Changed from 80px to make it a perfect square */
+    height: 70px;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f7f0f0;
+    font-size: 28px;
+    margin-right: 18px;
+    flex-shrink: 0;
+}
+
+/* ===============================
+   Fix Text Alignment Inside Cards
+================================= */
+.stat-card div, 
+.resume-card div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;    /* Forces text to align flat against the icon */
+}
+
+/* ===============================
+   Individual Colors
+================================= */
+
+.total-card .stat-icon{
+
+    background:linear-gradient(135deg,#ff9800,#ff6d00);
+
+}
+
+.average-card .stat-icon{
+
+    background:linear-gradient(135deg,#7c4dff,#5b3df5);
+
+}
+
+.resume-card .stat-icon{
+
+    background:linear-gradient(135deg,#16b67f,#0e9b6f);
+
+}
+
+/* ===============================
+   Text
+================================= */
+
+.stat-card h2{
+
+    font-size:32px;
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+    color:#f6efef;
+
+}
+
+.stat-card p{
+
+    font-size:16px;
+
+    color:rgba(246, 241, 241, 0.92);
+
+    font-weight:500;
+
+}
+
+
+
+
+
+/* ==========================================================
+   PART 2
+   Hero Section + Start Button + Quick Access
+========================================================== */
+
+/* ===============================
+   Hero Card
+================================= */
+
+
+
+
+
+
+/* ===============================
+   Start Button
+================================= */
+
+.start-btn{
+
+    margin-top:35px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:18px 45px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#7c4dff,#3f51ff);
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:0 10px 30px rgba(70,60,255,.35);
+
+}
+
+.start-btn svg{
+
+    font-size:18px;
+
+}
+
+.start-btn:hover{
+
+    transform:translateY(-5px) scale(1.04);
+
+    box-shadow:0 18px 40px rgba(70,60,255,.45);
+
+}
+
+/* ===============================
+   Quick Access
+================================= */
+
+.quick-section{
+
+    margin-top:70px;
+
+    text-align:center;
+
+}
+
+.quick-section h2{
+
+    font-size:34px;
+
+    color:#fff;
+
+    margin-bottom:35px;
+
+    font-weight:700;
+
+}
+
+/* ===============================
+   Quick Access Layout
+================================= */
+
+.quick-access{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:35px;
+
+    flex-wrap:wrap;
+
+}/* ==========================================================
+   PART 3
+   Quick Access Cards + Responsive
+========================================================== */
+
+/* ===============================
+   Quick Access Card
+================================= */
+
+.quick-card{
+
+    width:150px;
+
+    height:150px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    transition:.35s;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.20);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.quick-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+
+    height:220px;
+
+    background:rgba(255,255,255,.06);
+
+    border-radius:50%;
+
+    top:-120px;
+
+    right:-100px;
+
+}
+
+/* ===============================
+   Circle Icon
+================================= */
+
+.circle-icon{
+    width: 45px;      /* Reduced from 70px */
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.18);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+    z-index: 2;
+}
+
+.quick-card h3{
+    font-size:15px;
+    font-weight:600;
+}
+
+/* ===============================
+   Individual Colors
+================================= */
+
+.interview-card{
+
+    background:linear-gradient(135deg,#7c4dff,#5b3df5);
+
+}
+
+.resume-btn{
+
+    background:linear-gradient(135deg,#12b981,#0f9d74);
+
+}
+
+.report-btn{
+
+    background:linear-gradient(135deg,#ff9800,#ff6d00);
+
+}
+
+.history-btn{
+
+    background:linear-gradient(135deg,#2b8cff,#0068d6);
+
+}
+
+/* ===============================
+   Hover Effects
+================================= */
+
+.quick-card:hover{
+
+    transform:translateY(-12px) scale(1.06);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.30);
+
+}
+
+.quick-card:hover .circle-icon{
+
+    transform:rotate(12deg) scale(1.12);
+
+    transition:.35s;
+
+}
+
+/* ===============================
+   Scrollbar
+================================= */
+
+.dashboard-page::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.dashboard-page::-webkit-scrollbar-thumb{
+
+    background:#7c4dff;
+
+    border-radius:20px;
+
+}
+
+/* ===============================
+   Responsive
+================================= */
+
+@media(max-width:1200px){
+
+    .dashboard-page{
+
+        margin-left:90px;
+
+        padding:25px;
+
+    }
+
+    .hero-card{
+
+        padding:45px 30px;
+
+    }
+
+}
+
+@media(max-width:992px){
+
+    .stats-container{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .hero-card h1{
+
+        font-size:36px;
+
+    }
+
+    .hero-card p{
+
+        font-size:16px;
+
+    }
+
+    .quick-access{
+
+        gap:25px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .dashboard-page{
+
+        margin-left:0;
+
+        padding:20px;
+
+    }
+
+    .hero-card{
+
+        padding:35px 20px;
+
+    }
+
+    .hero-card h1{
+
+        font-size:30px;
+
+    }
+
+    .hero-card p{
+
+        font-size:15px;
+
+    }
+
+    .quick-card{
+
+        width:140px;
+
+        height:140px;
+
+    }
+
+    .circle-icon{
+
+        width:60px;
+
+        height:60px;
+
+        font-size:24px;
+
+    }
+
+    .quick-card h3{
+
+        font-size:15px;
+
+    }
+
+    .stat-card{
+
+        width:100%;
+
+        max-width:360px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .hero-card h1{
+
+        font-size:26px;
+
+    }
+
+    .welcome-tag{
+
+        font-size:12px;
+
+    }
+
+    .start-btn{
+
+        width:100%;
+
+        justify-content:center;
+
+        padding:15px;
+
+    }
+
+    .quick-access{
+
+        gap:18px;
+
+    }
+
+    .quick-card{
+
+        width:120px;
+
+        height:120px;
+
+    }
+
+    .circle-icon{
+
+        width:52px;
+
+        height:52px;
+
+        font-size:22px;
+
+        margin-bottom:12px;
+
+    }
+
+    .quick-card h3{
+
+        font-size:14px;
+
+    }
+
+}
