@@ -93,12 +93,21 @@ MAX_RESUME_CHARS = 1200         # truncate resume text to stay well under 6000 T
 _generator = None  # transformers pipeline generator (lazy)
 _tokenizer = None
 _model = None
+_use_ollama = False
 
 
 def _init_local_generator():
     """Lazy-load a Hugging Face text-generation pipeline."""
     global _generator, _tokenizer, _model
-    if _generator is not None:
+    global _use_ollama
+    if _generator is not None or _use_ollama:
+        return
+
+    backend = os.getenv("AI_BACKEND", "transformers").strip().lower()
+    if backend == "ollama":
+        # Use Ollama CLI (local inference) if requested. We don't import
+        # heavy libs; the ollama binary must be installed on the host.
+        _use_ollama = True
         return
 
     try:
@@ -133,17 +142,42 @@ async def _call(messages: list, temperature: float = DEFAULT_TEMPERATURE, max_to
     _init_local_generator()
 
     # Build a single prompt from system + user messages
-    try:
-        prompt_parts = []
-        for m in messages:
-            role = m.get("role", "user")
-            content = m.get("content", "")
-            if role == "system":
-                prompt_parts.append(f"[SYSTEM]\n{content}\n")
-            else:
-                prompt_parts.append(content)
-        prompt = "\n\n".join(prompt_parts)
+    prompt_parts = []
+    for m in messages:
+        role = m.get("role", "user")
+        content = m.get("content", "")
+        if role == "system":
+            prompt_parts.append(f"[SYSTEM]\n{content}\n")
+        else:
+            prompt_parts.append(content)
+    prompt = "\n\n".join(prompt_parts)
 
+    # Ollama mode: call local `ollama` CLI if configured
+    backend = os.getenv("AI_BACKEND", "transformers").strip().lower()
+    model_name = os.getenv("LOCAL_MODEL_NAME", MODEL_NAME)
+    if backend == "ollama":
+        # Use subprocess to call `ollama generate <model> --prompt "..."`
+        def run_ollama():
+            import subprocess
+            try:
+                cmd = ["ollama", "generate", model_name, "--prompt", prompt]
+                proc = subprocess.run(cmd, capture_output=True, text=True, check=True)
+                return proc.stdout.strip()
+            except Exception as e:
+                raise RuntimeError(f"Ollama generation failed: {e} - stderr: {getattr(e, 'stderr', '')}")
+
+        try:
+            result = await asyncio.to_thread(run_ollama)
+            # Ollama may echo metadata; return full stdout trimmed.
+            return result.strip()
+        except Exception as exc:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail=f"Ollama generation failed: {exc}"
+            )
+
+    # Default: transformers pipeline
+    try:
         # transformers pipeline runs in a blocking thread; offload to thread
         def gen():
             out = _generator(
