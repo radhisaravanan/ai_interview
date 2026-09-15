@@ -105,8 +105,20 @@ def _init_local_generator():
 
     backend = os.getenv("AI_BACKEND", "transformers").strip().lower()
     if backend == "ollama":
-        # Use Ollama CLI (local inference) if requested. We don't import
-        # heavy libs; the ollama binary must be installed on the host.
+        # Use Ollama CLI (local inference) if requested. Validate that the
+        # `ollama` binary is available on the host and bail early with a
+        # helpful error if it's not found.
+        import shutil
+
+        if not shutil.which("ollama"):
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=(
+                    "AI_BACKEND=ollama was selected but the `ollama` CLI was not found in PATH. "
+                    "Install Ollama (https://ollama.ai) and pull a model, or unset AI_BACKEND to use the transformers fallback."
+                ),
+            )
+
         _use_ollama = True
         return
 
