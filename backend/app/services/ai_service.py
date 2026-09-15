@@ -7,7 +7,7 @@ import random
 import logging
 from datetime import datetime, timezone
 from difflib import SequenceMatcher
-from groq import Groq
+# Replaced Groq with local Hugging Face transformers pipeline (lazy-loaded)
 from dotenv import load_dotenv
 from fastapi import HTTPException, status
 
@@ -82,121 +82,91 @@ def _phase_hint(question_number, projects=None, skills=None, job_role=None):
 # ---------------------------------------------------------------------------
 # Multi-API-Key Load Balancing (Round-Robin + 429 failover)
 # ---------------------------------------------------------------------------
-MODEL_NAME = "llama-3.1-8b-instant"  # fast, low-token model
-REQUEST_TIMEOUT = 10            # seconds per Groq call (fast <1s target)
+MODEL_NAME = os.getenv("LOCAL_MODEL_NAME", "gpt2-medium")
+REQUEST_TIMEOUT = 10            # kept for compatibility with older settings
 DEFAULT_TEMPERATURE = 0.95      # high creativity + unpredictable storylike human angles
 MAX_BANNED_IN_PROMPT = 20       # ONLY last 20 banned questions go to Groq
 MAX_TOTAL_ATTEMPTS = 4          # per-question regeneration attempts
 SIM_RETRY_THRESHOLD = 0.55      # difflib > 55% => strict structural repetition
 MAX_RESUME_CHARS = 1200         # truncate resume text to stay well under 6000 TPM
 
-_api_pool = None  # list[Groq]  -> built lazily from GROQ_API_KEYS
-_rr_index = 0     # round-robin cursor (next key to try first)
-_cooldown_until = {}  # key_index -> unix timestamp (seconds) until key unthrottled
-_retries = {}     # key_index -> count of consecutive overall-failures
+_generator = None  # transformers pipeline generator (lazy)
+_tokenizer = None
+_model = None
 
 
-def _build_pool() -> list:
-    global _api_pool
-    if _api_pool is not None:
-        return _api_pool
+def _init_local_generator():
+    """Lazy-load a Hugging Face text-generation pipeline."""
+    global _generator, _tokenizer, _model
+    if _generator is not None:
+        return
 
-    keys = []
-    raw = os.getenv("GROQ_API_KEYS")
-    if raw:
-        keys = [k.strip() for k in raw.split(",") if k.strip()]
-    if not keys:
-        single = os.getenv("GROQ_API_KEY")
-        if single and single.strip():
-            keys = [single.strip()]
-    if not keys:
+    try:
+        from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+        import torch
+    except Exception as exc:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="GROQ_API_KEYS (or GROQ_API_KEY) is not configured in .env file."
+            detail=f"transformers or torch not installed: {exc}"
         )
 
-    _api_pool = [Groq(api_key=k, timeout=REQUEST_TIMEOUT) for k in keys]
-    return _api_pool
+    model_name = MODEL_NAME
+    # Load tokenizer + model (may be large; choose a small model for dev by default)
+    _tokenizer = AutoTokenizer.from_pretrained(model_name)
+    _model = AutoModelForCausalLM.from_pretrained(model_name)
 
-
-def get_groq_client() -> Groq:
-    """Backwards-compatible accessor returning the first configured key's client."""
-    return _build_pool()[0]
-
-
-def _is_rate_limit(exc: Exception) -> bool:
-    msg = str(exc).lower()
-    return ("429" in msg) or ("rate limit" in msg) or ("rate_limit" in msg) or ("quota" in msg)
-
-
-def _is_503_or_conn(exc: Exception) -> bool:
-    """True for Groq 503 (queue full) / connection / internal-server errors that
-    warrant pausing briefly and rotating to the next API key."""
-    msg = str(exc).lower()
-    cls = exc.__class__.__name__.lower()
-    if "apiconnectionerror" in cls or "internalservererror" in cls or "apistatuserror" in cls:
-        return True
-    return ("503" in msg) or ("queue full" in msg) or ("502" in msg) or ("bad gateway" in msg) or ("connection" in msg)
+    device = 0 if torch.cuda.is_available() else -1
+    _generator = pipeline(
+        "text-generation",
+        model=_model,
+        tokenizer=_tokenizer,
+        device=device,
+    )
 
 
 async def _call(messages: list, temperature: float = DEFAULT_TEMPERATURE, max_tokens: int = 512) -> str:
-    """Fire a chat completion against the API-key pool (NON-STREAMING).
+    """Local text-generation call using the transformers pipeline.
 
-    Round-robins across all configured keys for even load distribution. On a
-    429 (rate limit) it sleeps 2.0s (exponential backoff) so the Groq minute
-    window resets before retrying; on 503 (queue full) / connection / timeout
-    it pauses 0.5s, rotates to the next key, and retries up to `size` keys.
-    Rate-limited keys are put on a short cooldown.
+    `messages` is expected to be a list of dicts with `role` and `content`.
+    We convert that to a single prompt string (system + user) and generate text.
     """
-    global _rr_index
-    pool = _build_pool()
-    size = len(pool)
-    now = time.monotonic()
+    _init_local_generator()
 
-    # pick a starting slot farthest away from recent failures
-    base = _rr_index % size
-
-    for offset in range(size):
-        idx = (base + offset) % size
-
-        # skip a key that was just rate-limited until its cooldown lapses
-        if _cooldown_until.get(idx, 0) > now:
-            continue
-
-        client = pool[idx]
-        try:
-            response = await asyncio.to_thread(
-                lambda c=client: c.chat.completions.create(
-                    model=MODEL_NAME,
-                    messages=messages,
-                    temperature=temperature,
-                    max_tokens=max_tokens,
-                    stream=False,  # DISABLE streaming -> no mid-response 503s
-                )
-            )
-            _rr_index = (idx + 1) % size  # advance so next call starts on a new key
-            _retries.pop(idx, None)
-            return response.choices[0].message.content
-        except Exception as exc:
-            _retries[idx] = _retries.get(idx, 0) + 1
-            print(f"{BOLD}{RED}❌ Groq call failed on key[{idx}] (stream=False): {exc}{RESET}")
-            # mark the failing key unusable for a short cooldown so later
-            # attempts in this same call prefer healthier keys.
-            if _is_rate_limit(exc):
-                _cooldown_until[idx] = now + 60  # rate-limited key: 60s cooldown
-                print(f"{BOLD}{YELLOW}⏳ 429 RATE LIMIT on key[{idx}] - sleeping 2.0s (backoff) before retrying...{RESET}")
-                await asyncio.sleep(2.0)  # 2.0s backoff so the Groq minute window resets
+    # Build a single prompt from system + user messages
+    try:
+        prompt_parts = []
+        for m in messages:
+            role = m.get("role", "user")
+            content = m.get("content", "")
+            if role == "system":
+                prompt_parts.append(f"[SYSTEM]\n{content}\n")
             else:
-                _cooldown_until[idx] = now + 2
-            if _is_503_or_conn(exc):
-                await asyncio.sleep(0.5)  # 0.5s pause then rotate to next key
-            # rotate to the next key regardless of error type (429/503/timeout/500)
-            continue
+                prompt_parts.append(content)
+        prompt = "\n\n".join(prompt_parts)
 
-    raise HTTPException(
-        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-        detail="AI Service Unavailable. Please Try Again."
-    )
+        # transformers pipeline runs in a blocking thread; offload to thread
+        def gen():
+            out = _generator(
+                prompt,
+                max_new_tokens=max_tokens,
+                do_sample=True,
+                temperature=float(temperature),
+                top_k=50,
+                num_return_sequences=1,
+            )
+            # pipeline returns list of dicts with 'generated_text'
+            return out[0]["generated_text"] if isinstance(out, list) and out else str(out)
+
+        result = await asyncio.to_thread(gen)
+        # Strip the prompt prefix if the model echoes it
+        if result.startswith(prompt):
+            return result[len(prompt) :].strip()
+        return result.strip()
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Local AI generation failed: {exc}"
+        )
 
 
 def _extract_json(content: str):

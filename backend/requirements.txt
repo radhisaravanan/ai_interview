@@ -10,3 +10,5 @@ python-multipart
 google-genai
 PyPDF2
 pdfminer.six
+transformers
+torch
